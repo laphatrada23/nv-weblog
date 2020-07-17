@@ -8,4 +8,5 @@ const User = sequelize.define('User', {
  type: DataTypes.STRING   
 }) 
  
-  return User }
+  return User
+ }
