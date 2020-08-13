@@ -12,7 +12,7 @@
  <p><button v-on:click="logout">Logout</button></p>
 <button v-on:click="navigateTo('/user/edit/'+ user.id)">แก้ไขข้อมูล
 </button>
-<button v-on:click="deleteUser(user)">ลบข้อมูล</button>
+<p><button v-on:click="deleteUser(user)">ลบข้อมูล</button>
 </p>
  <hr>
 </div>
@@ -20,15 +20,14 @@
 </template>
 <script>
 import UsersService from '@/services/UsersService'
-
  export default {
  data () {
  return {
  users: []
  }
  },
- 
 
+ 
 async created () {
  try {
     this.users = (await UsersService.index()).data
@@ -36,12 +35,10 @@ async created () {
 console.log (error)
  }
 },
-
 methods: {
  navigateTo (route) {
  this.$router.push(route)
  },
-
  logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
@@ -49,12 +46,9 @@ methods: {
    name: 'login'
    })
 },
-
  async deleteUser (user) {
- 
  await UsersService.delete(user)
  this.refreshData()
-
  },
  async refreshData() {
  this.users = (await UsersService.index()).data
